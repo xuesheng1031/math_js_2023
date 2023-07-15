@@ -93,9 +93,9 @@ def draw_order_for_problem_1(order_list):
     ax.set_yticks(y_ticks)  # Set the y ticks to the list of integers
     ax.set_yticklabels(y_ticks)  # Set the y tick labels to the list of integers
 
-    plt.title('Optimal job scheduling strategy')
-    plt.xlabel('Time')
-    plt.ylabel('Device')
+    plt.title('Optimal job scheduling strategy', fontsize=26)
+    plt.xlabel('Time', fontsize=22)
+    plt.ylabel('Device', fontsize=22)
     plt.show()
 
 
