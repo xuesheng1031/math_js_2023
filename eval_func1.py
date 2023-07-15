@@ -158,6 +158,3 @@ def c_max(order_list, if_return_load_table=False):
                 load_table.append([device.name, device.line_num, i, [device.start_time[i], device.end_time[i]]])
         return load_table, end_time
     return end_time
-
-
-
