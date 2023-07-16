@@ -10,7 +10,7 @@ import datetime
 
 # plt.rcParams['font.sans-serif'] = ['SimHei'] # 指定默认字体
 # plt.rcParams['axes.unicode_minus'] = False # 解决保存图像是负号'-'显示为方块的问题
-import eval_func1
+import eval_func2_xs
 jobs = 48  # 工件数
 population_num = 1000  # 种群规模
 population = []  # 初始种群
@@ -30,7 +30,7 @@ class Node:
     def __init__(self, state):
         self.state = state
         # 真实的适应度函数
-        end_time = eval_func1.c_max(state)
+        end_time = eval_func2_xs.c_max(state)
         self.end_time = end_time
 
 
