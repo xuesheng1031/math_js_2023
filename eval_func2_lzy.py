@@ -70,8 +70,6 @@ time_table_2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 60, 35, 30, 40],
 time_table_2 = read_csv("2.csv")
 
 
-
-
 class Device:
     def __init__(self, name, test_requirement_dict: dict):
         # {0: [0, ], 1: [0,], ...8: [40]}  #测试需求时间表
@@ -117,7 +115,6 @@ class ProductionLine:
                 self.available_time_point = min(self.available_time_queue)
 
 
-
 class TestPlace:
     def __init__(self, name, order, add_num):
         self.name = name # 测试位名称
@@ -146,6 +143,21 @@ class TestPlace:
         if self.order <= 18:
             device.start_time[self.order + 1] = end_time
 
+{2:[120, 65, 60, 15]}
+
+class TestPlace2(TestPlace):
+    def test(self, device: Device):
+        time_load_list = device.test_requirement_dict[self.order]
+        time_spent_total = time_load_list[0]
+        if self.add_num == 2:
+            return max(time_spent_total[-3:])
+        if self.add_num == 1:
+            poss_1 = time_load_list[-2] + time_spent_total[-3]
+            poss_2 = time_spent_total[-1] + time_spent_total[-2]
+            poss_3 = time_spent_total[-1] + time_spent_total[-3]
+            return min(poss_1, poss_2, poss_3)
+        if self.add_num == 0:
+            return time_spent_total
 
 class Factory:
     def __init__(self, production_line_list: list):
@@ -175,6 +187,12 @@ def c_max(order_list, if_return_load_table=True):
     # 连个设备测试线，分别包含19台设备
     active_list1 = [1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1]  # 你的激活列表
     active_list2 = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  # 你的激活列表
+    active_list = [0, 0, 1, 1, 0, 1, 1, 1, 1, 1]
+    add_num = active_list[:2]
+    line1_test_place2 = TestPlace2('line1_test_place2', 2, add_num)
+    add_num = active_list[2:4]
+    line2_test_place2 = TestPlace2('line2_test_place2', 2, add_num)
+    add_num = active_list[5]
     production_line1 = ProductionLine([TestPlace(str(i), i, 0) for i in range(19)], 1, active_list1)
     production_line2 = ProductionLine([TestPlace(str(i), i, 0) for i in range(19)], 2, active_list2)
     factory = Factory([production_line1, production_line2])
