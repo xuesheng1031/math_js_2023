@@ -1,8 +1,4 @@
-
-import matplotlib.pyplot as plt
-from collections import OrderedDict, deque
-import random
-import copy
+from collections import deque
 
 time_table = [[0, 0, 0, 0, 0, 0, 25, 60, 40],
               [0, 0, 0, 0, 0, 0, 25, 60, 40],
@@ -52,14 +48,13 @@ time_table = [[0, 0, 0, 0, 0, 0, 25, 60, 40],
               [40, 80, 90, 35, 200, 60, 50, 80, 70],
               [40, 80, 90, 35, 200, 60, 50, 80, 70],
               [40, 80, 90, 35, 200, 60, 50, 80, 70]]
-# random.seed(0)
 
 
 class Device:
     def __init__(self, name, test_requirement_dict: dict):
         # {0: [0, ], 1: [0,], ...8: [40]}  #测试需求时间表
-        self.name = name # 设备名称
-        self.test_requirement_dict= test_requirement_dict  # 测试需求表
+        self.name = name  # 设备名称
+        self.test_requirement_dict = test_requirement_dict  # 测试需求表
         self.start_time = [0 for i in range(9)]  # 测试开始时间
         self.end_time = [0 for i in range(9)]  # 测试结束时间
         self.line_num = None  # 测试线号
@@ -91,11 +86,11 @@ class ProductionLine:
 
 class TestPlace:
     def __init__(self, name, order, add_num):
-        self.name = name # 测试位名称
-        self.order = order # 所在位置
-        self.add_num = add_num # 扩建数量
+        self.name = name  # 测试位名称
+        self.order = order  # 所在位置
+        self.add_num = add_num  # 扩建数量
         self.available_time_point = 0  # 可用时间点
-        self._test_record = [] # 测试记录
+        self._test_record = []  # 测试记录
 
     def test_spent(self, device: Device):
         return device.test_requirement_dict[self.order]
@@ -120,7 +115,7 @@ class TestPlace:
 
 class Factory:
     def __init__(self, production_line_list: list):
-        self.production_line_list = production_line_list # 产线列表
+        self.production_line_list = production_line_list  # 产线列表
 
     def test(self, device):
         # 产线列表按可用时间点排序
@@ -142,7 +137,7 @@ def c_max(order_list, if_return_load_table=False):
         device = Device(f'{i}', req_dict)
         device_list.append(device)
 
-    device_test_list = [device_list[i] for i in order_list]    # 将设备按顺序排列
+    device_test_list = [device_list[i] for i in order_list]  # 将设备按顺序排列
     # 连个设备测试线，分别包含9台设备
     production_line1 = ProductionLine([TestPlace(str(i), i, 0) for i in range(9)], 1)
     production_line2 = ProductionLine([TestPlace(str(i), i, 0) for i in range(9)], 2)
