@@ -6,7 +6,7 @@ y_min = []
 y_avg = []
 
 # Read the first 1500 lines from the txt file
-with open('/Users/xs/PycharmProjects/math_lzy/data.txt', 'r') as f:
+with open('/Users/xs/PycharmProjects/math_lzy/file_20230715_035015.txt', 'r') as f:
     line_count = 0
     for line in f:
         # Break the loop if line_count reaches 1500
@@ -49,7 +49,7 @@ plt.xlabel('Genetic Generation', fontsize=15)
 plt.legend()
 
 # Annotate the current values at every 400 generations
-for i in range(0, len(x), 450):
+for i in range(0, len(x), 500):
     plt.annotate(f'Min: {y_min[i]}', (x[i], y_min[i]), textcoords="offset points", xytext=(0, -15), ha='center', fontsize=15)
     plt.annotate(f'Avg: {y_avg[i]}', (x[i], y_avg[i]), textcoords="offset points", xytext=(0, 20), ha='center', fontsize=15)
 
